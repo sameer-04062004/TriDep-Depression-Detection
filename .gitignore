@@ -1,0 +1,38 @@
+# ---- Dataset & derived data (NEVER commit — licensed clinical data) ----
+DAIC/
+cache/
+*.wav
+*.mp3
+*_TRANSCRIPT.csv
+*_CLNF_*.txt
+*_CLNF_*.bin
+cache_backup.zip
+demo_bundle.zip
+demo_data.npz
+AR_demo_data.npz
+Baseline_demo_data.npz
+Improved_demo_data.npz
+*_demo_samples/
+subject_*.npz
+
+# ---- Model weights (large binaries — use releases or Git LFS if needed) ----
+*.keras
+*.h5
+*.pkl
+*.pt
+*.pth
+
+# ---- Colab / Jupyter ----
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# ---- OS / editor ----
+.DS_Store
+.vscode/
+.idea/
+
+# ---- Credentials (just in case) ----
+*.env
+credentials.json
+token.json
