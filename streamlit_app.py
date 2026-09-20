@@ -419,3 +419,4 @@ with tab3:
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.divider()
 st.caption("⚠️ **Research Prototype Disclaimer:** TriDep is an academic AI research prototype designed for automated screening assistance, not for definitive psychiatric diagnosis. Always consult a qualified medical professional.")
+

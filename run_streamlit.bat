@@ -6,3 +6,4 @@ echo ============================================================
 echo.
 py -3.12 -m streamlit run streamlit_app.py
 pause
+
