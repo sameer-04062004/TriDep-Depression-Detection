@@ -24,6 +24,10 @@ hf_space/
 *.pt
 *.pth
 
+# Allow deployment demo bundle for Streamlit Cloud
+!models/
+!models/*
+
 # ---- Colab / Jupyter ----
 .ipynb_checkpoints/
 __pycache__/

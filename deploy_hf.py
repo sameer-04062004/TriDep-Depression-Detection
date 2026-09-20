@@ -76,3 +76,4 @@ except Exception as e:
     print(f"1. Go to https://huggingface.co/new-space")
     print(f"2. Name: TriDep-Depression-Detection, SDK: Gradio")
     print(f"3. Upload the files inside the 'hf_space' folder directly via the 'Files' tab!")
+

@@ -36,8 +36,11 @@ Access requires signing an End User Licence Agreement (EULA). This repository co
 ## Repository Structure
 
 ```
+streamlit_app.py           # Streamlit web application (Deployable on Streamlit Cloud)
 app.py                     # Standalone Gradio web application
-run_demo.bat               # 1-click Windows launcher for local demo
+run_streamlit.bat          # 1-click Windows launcher for Streamlit demo
+run_demo.bat               # 1-click Windows launcher for Gradio demo
+models/                    # Lightweight demo bundle for cloud deployment (5.8 MB)
 notebooks/
   01_preprocess.ipynb      # Feature extraction (SBERT, Wav2Vec2, FAU) and caching
   02_train_evaluate.ipynb  # Model training + Baseline vs Improved evaluation
@@ -50,15 +53,21 @@ docs/                      # Project summary / abstract
 
 ## Quick Start — Run the Demo
 
-### Online (Cloud)
-Visit the live Hugging Face Space: **[TriDep Demo](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)**
+### 1. Online (Streamlit Community Cloud — 100% Free)
+Deploy directly with 1 click to Streamlit Cloud:
+1. Go to [share.streamlit.io](https://share.streamlit.io) and connect your GitHub account.
+2. Select repository: `sameer-04062004/TriDep-Depression-Detection`.
+3. Set Main file path: `streamlit_app.py`.
+4. Click **Deploy!**
 
-### Locally (Windows)
+### 2. Locally (Windows)
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-2. Double-click **`run_demo.bat`** (or run `python app.py`) to launch the local screening interface at `http://127.0.0.1:7860`.
+2. Run either:
+   - **Streamlit Demo:** Double-click **`run_streamlit.bat`** (or run `streamlit run streamlit_app.py`)
+   - **Gradio Demo:** Double-click **`run_demo.bat`** (or run `python app.py`)
 
 Notebooks are designed for **Google Colab** with a mounted Google Drive containing your own licensed copy of DAIC-WOZ, organised as:
 
