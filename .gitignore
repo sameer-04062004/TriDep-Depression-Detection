@@ -15,6 +15,7 @@ Improved_demo_data.npz
 *_demo_samples/
 subject_*.npz
 saved_models/
+hf_space/
 
 # ---- Model weights (large binaries — use releases or Git LFS if needed) ----
 *.keras
