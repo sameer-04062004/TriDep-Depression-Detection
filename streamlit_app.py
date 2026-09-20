@@ -441,7 +441,23 @@ with tab3:
         'F1-Score (Weighted)': [0.534, 0.504, 0.693, 0.707, 0.804, 0.805],
     })
 
-    st.dataframe(perf_data.style.highlight_max(axis=0, color="#dcfce7", subset=["Accuracy", "Recall (Dep)", "F1-Score (Dep)"]), use_container_width=True)
+    def highlight_best(s):
+        is_max = s == s.max()
+        return ['background-color: #064e3b; color: #6ee7b7; font-weight: bold;' if v else '' for v in is_max]
+
+    styled_table = (
+        perf_data.style
+        .format({
+            'Accuracy': '{:.1%}',
+            'Precision (Dep)': '{:.1%}',
+            'Recall (Dep)': '{:.1%}',
+            'F1-Score (Dep)': '{:.3f}',
+            'F1-Score (Weighted)': '{:.3f}'
+        })
+        .apply(highlight_best, subset=['Accuracy', 'Recall (Dep)', 'F1-Score (Dep)'])
+    )
+
+    st.dataframe(styled_table, use_container_width=True, hide_index=True)
 
     st.markdown("""
     > 💡 **Clinical Impact:** The **Combined OR-Decision Ensemble** achieves **91.7% Recall** on depressed patients. In mental health screening, high sensitivity is crucial to minimize false negatives and ensure potential depression cases are flagged for clinician review.
