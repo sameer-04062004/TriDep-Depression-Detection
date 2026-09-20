@@ -1,9 +1,9 @@
 # TriDep — Tri-Modal Deep Learning Framework for Automated Depression Detection
 
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Live%20Demo-blue?style=for-the-badge&logo=huggingface)](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://tridep-depression-detection.streamlit.app/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-> 🚀 **Live Interactive Demo:** [Open TriDep on Hugging Face Spaces](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)  
+> 🚀 **Live Interactive Web App:** **[tridep-depression-detection.streamlit.app](https://tridep-depression-detection.streamlit.app/)**  
 > ⚠️ **Research prototype only — not a clinical diagnostic tool.** Always consult a qualified mental health professional.
 
 A research prototype that detects depression from clinical interview recordings by combining three behavioural modalities — **text**, **audio**, and **video** — using pre-trained representation models and a model-level fusion network. Evaluated on the DAIC-WOZ dataset using both Leave-One-Subject-Out Cross-Validation and 5-Fold Stratified Cross-Validation.
@@ -53,12 +53,9 @@ docs/                      # Project summary / abstract
 
 ## Quick Start — Run the Demo
 
-### 1. Online (Streamlit Community Cloud — 100% Free)
-Deploy directly with 1 click to Streamlit Cloud:
-1. Go to [share.streamlit.io](https://share.streamlit.io) and connect your GitHub account.
-2. Select repository: `sameer-04062004/TriDep-Depression-Detection`.
-3. Set Main file path: `streamlit_app.py`.
-4. Click **Deploy!**
+### 1. Online Live Demo (No Setup Needed)
+The model is deployed and live 24/7 on Streamlit Community Cloud:  
+👉 **[Open Live Demo: tridep-depression-detection.streamlit.app](https://tridep-depression-detection.streamlit.app/)**
 
 ### 2. Locally (Windows)
 1. Install dependencies:
