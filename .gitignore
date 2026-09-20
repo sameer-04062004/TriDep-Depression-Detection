@@ -6,7 +6,7 @@ cache/
 *_TRANSCRIPT.csv
 *_CLNF_*.txt
 *_CLNF_*.bin
-cache_backup.zip
+*.zip
 demo_bundle.zip
 demo_data.npz
 AR_demo_data.npz
@@ -14,6 +14,7 @@ Baseline_demo_data.npz
 Improved_demo_data.npz
 *_demo_samples/
 subject_*.npz
+saved_models/
 
 # ---- Model weights (large binaries — use releases or Git LFS if needed) ----
 *.keras

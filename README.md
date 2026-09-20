@@ -1,8 +1,12 @@
 # TriDep — Tri-Modal Deep Learning Framework for Automated Depression Detection
 
-A research prototype that detects depression from clinical interview recordings by combining three behavioural modalities — **text**, **audio**, and **video** — using pre-trained representation models and a model-level fusion network. Evaluated on the DAIC-WOZ dataset using both Leave-One-Subject-Out Cross-Validation and 5-Fold Stratified Cross-Validation.
+[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Spaces%20Live%20Demo-blue?style=for-the-badge&logo=huggingface)](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
+> 🚀 **Live Interactive Demo:** [Open TriDep on Hugging Face Spaces](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)  
 > ⚠️ **Research prototype only — not a clinical diagnostic tool.** Always consult a qualified mental health professional.
+
+A research prototype that detects depression from clinical interview recordings by combining three behavioural modalities — **text**, **audio**, and **video** — using pre-trained representation models and a model-level fusion network. Evaluated on the DAIC-WOZ dataset using both Leave-One-Subject-Out Cross-Validation and 5-Fold Stratified Cross-Validation.
 
 ## Overview
 
@@ -32,20 +36,29 @@ Access requires signing an End User Licence Agreement (EULA). This repository co
 ## Repository Structure
 
 ```
+app.py                     # Standalone Gradio web application
+run_demo.bat               # 1-click Windows launcher for local demo
 notebooks/
   01_preprocess.ipynb      # Feature extraction (SBERT, Wav2Vec2, FAU) and caching
   02_train_evaluate.ipynb  # Model training + Baseline vs Improved evaluation
-  03_demo.ipynb            # Interactive demo (subject picker + live upload)
-  fusion.ipynb             # Decision-level ensemble experiments
+  03_tridep_gcn_demo.ipynb # Interactive demo notebook (TriDep + InducT-GCN)
+  fusion.ipynb             # Decision-level ensemble experiments & evaluations
+  Induct_gcn.ipynb         # InducT-GCN text graph neural network training
 results/figures/           # Aggregate result plots (no patient data)
 docs/                      # Project summary / abstract
 ```
 
-## Setup
+## Quick Start — Run the Demo
 
-```bash
-pip install -r requirements.txt
-```
+### Online (Cloud)
+Visit the live Hugging Face Space: **[TriDep Demo](https://huggingface.co/spaces/sameer-04062004/TriDep-Depression-Detection)**
+
+### Locally (Windows)
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. Double-click **`run_demo.bat`** (or run `python app.py`) to launch the local screening interface at `http://127.0.0.1:7860`.
 
 Notebooks are designed for **Google Colab** with a mounted Google Drive containing your own licensed copy of DAIC-WOZ, organised as:
 
