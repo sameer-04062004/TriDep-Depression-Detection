@@ -29,30 +29,49 @@ st.markdown("""
         box-shadow: 0 10px 25px rgba(30, 58, 138, 0.2);
     }
     .metric-card-depressed {
-        background: #fff1f2;
-        border: 2px solid #fb7185;
+        background: rgba(239, 68, 68, 0.12);
+        border: 2px solid #ef4444;
         border-radius: 14px;
         padding: 16px;
         text-align: center;
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .metric-card-healthy {
-        background: #ecfdf5;
-        border: 2px solid #34d399;
+        background: rgba(16, 185, 129, 0.12);
+        border: 2px solid #10b981;
         border-radius: 14px;
         padding: 16px;
         text-align: center;
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .metric-card-neutral {
+        background: rgba(100, 116, 139, 0.12);
+        border: 2px dashed rgba(148, 163, 184, 0.45);
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        min-height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     .final-banner-depressed {
-        background: linear-gradient(135deg, #fef2f2, #fee2e2);
-        border: 3px solid #f87171;
+        background: rgba(239, 68, 68, 0.15);
+        border: 3px solid #ef4444;
         border-radius: 18px;
         padding: 20px;
         text-align: center;
         margin-top: 15px;
     }
     .final-banner-healthy {
-        background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-        border: 3px solid #4ade80;
+        background: rgba(16, 185, 129, 0.15);
+        border: 3px solid #10b981;
         border-radius: 18px;
         padding: 20px;
         text-align: center;
@@ -168,7 +187,7 @@ with tab1:
     st.subheader("Select DAIC-WOZ Participant")
     st.write("Choose any participant from the dataset to evaluate their multi-modal features:")
 
-    col_filter, col_select = st.columns([1, 2])
+    col_filter, col_select, col_btn = st.columns([1.2, 1.6, 1.2])
     with col_filter:
         filter_mode = st.radio("Show participants:", ["Development Set (35 subjects)", "All Participants (189 subjects)"])
     
@@ -180,6 +199,11 @@ with tab1:
             options=available_choices,
             index=0 if available_choices else None
         )
+
+    with col_btn:
+        st.write("")
+        st.write("")
+        run_screening = st.button("🔬 Run Screening", type="primary", use_container_width=True)
 
     if selected_pid is not None and selected_pid in pid_list:
         idx = pid_list.index(selected_pid)
@@ -201,18 +225,18 @@ with tab1:
         with col1:
             pred_fp = fp >= 0.5
             card_class = "metric-card-depressed" if pred_fp else "metric-card-healthy"
-            color = "#e11d48" if pred_fp else "#059669"
+            color = "#f43f5e" if pred_fp else "#10b981"
             emoji = "🔴" if pred_fp else "🟢"
             txt = "Depressed" if pred_fp else "Not Depressed"
             
             st.markdown(f"""
             <div class="{card_class}">
-                <div style="font-size:0.8rem; font-weight:700; color:#475569; text-transform:uppercase;">
+                <div style="font-size:0.8rem; font-weight:700; opacity:0.85; text-transform:uppercase;">
                     🎵 TriDep Multimodal (A+V+T)
                 </div>
                 <div style="font-size:2.5rem; margin:6px 0;">{emoji}</div>
                 <div style="font-size:1.3rem; font-weight:800; color:{color};">{txt}</div>
-                <div style="font-size:0.9rem; color:#334155; margin-top:4px;">
+                <div style="font-size:0.9rem; opacity:0.9; margin-top:4px;">
                     Probability: <b>{fp*100:.1f}%</b>
                 </div>
             </div>
@@ -225,17 +249,17 @@ with tab1:
                 tp = float(row["text_prob"].values[0])
                 pred_tp = tp >= 0.5
                 card_class = "metric-card-depressed" if pred_tp else "metric-card-healthy"
-                color = "#e11d48" if pred_tp else "#059669"
+                color = "#f43f5e" if pred_tp else "#10b981"
                 emoji = "🔴" if pred_tp else "🟢"
                 txt = "Depressed" if pred_tp else "Not Depressed"
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <div style="font-size:0.8rem; font-weight:700; color:#475569; text-transform:uppercase;">
+                    <div style="font-size:0.8rem; font-weight:700; opacity:0.85; text-transform:uppercase;">
                         📝 InducT-GCN (Text Graph)
                     </div>
                     <div style="font-size:2.5rem; margin:6px 0;">{emoji}</div>
                     <div style="font-size:1.3rem; font-weight:800; color:{color};">{txt}</div>
-                    <div style="font-size:0.9rem; color:#334155; margin-top:4px;">
+                    <div style="font-size:0.9rem; opacity:0.9; margin-top:4px;">
                         Probability: <b>{tp*100:.1f}%</b>
                     </div>
                 </div>
@@ -243,11 +267,18 @@ with tab1:
                 st.progress(tp)
             else:
                 st.markdown("""
-                <div style="background:#f8fafc; border:1px dashed #cbd5e1; border-radius:14px; padding:24px; text-align:center; color:#64748b;">
-                    <b>📝 InducT-GCN (Text)</b><br><br>
-                    Evaluated on 35 Dev Set subjects.<br>TriDep Multimodal inference is active.
+                <div class="metric-card-neutral">
+                    <div style="font-size:0.8rem; font-weight:700; opacity:0.85; text-transform:uppercase;">
+                        📝 InducT-GCN (Text Graph)
+                    </div>
+                    <div style="font-size:2.2rem; margin:6px 0;">🌐</div>
+                    <div style="font-size:1.1rem; font-weight:700; opacity:0.9;">Dev Benchmark Only</div>
+                    <div style="font-size:0.85rem; opacity:0.8; margin-top:4px;">
+                        Evaluated on 35 Dev Set subjects.<br>TriDep Multimodal active for this subject.
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
+                st.progress(0.0)
 
         # Card 3: Combined OR Decision
         with col3:
@@ -258,18 +289,18 @@ with tab1:
                 or_pred = (fp >= 0.5)
 
             card_class = "metric-card-depressed" if or_pred else "metric-card-healthy"
-            color = "#e11d48" if or_pred else "#059669"
+            color = "#f43f5e" if or_pred else "#10b981"
             emoji = "🔴" if or_pred else "🟢"
             txt = "Depressed" if or_pred else "Not Depressed"
 
             st.markdown(f"""
             <div class="{card_class}">
-                <div style="font-size:0.8rem; font-weight:700; color:#475569; text-transform:uppercase;">
+                <div style="font-size:0.8rem; font-weight:700; opacity:0.85; text-transform:uppercase;">
                     🔗 Combined OR Vote (91.7% Recall)
                 </div>
                 <div style="font-size:2.5rem; margin:6px 0;">{emoji}</div>
                 <div style="font-size:1.3rem; font-weight:800; color:{color};">{txt}</div>
-                <div style="font-size:0.9rem; color:#334155; margin-top:4px;">
+                <div style="font-size:0.9rem; opacity:0.9; margin-top:4px;">
                     Ensemble Decision
                 </div>
             </div>
@@ -293,7 +324,7 @@ with tab1:
             <div style="font-size:1.8rem; font-weight:900; color:{banner_color};">
                 {banner_txt}
             </div>
-            <div style="font-size:1rem; color:#334155; font-weight:600; margin-top:6px;">
+            <div style="font-size:1rem; opacity:0.9; font-weight:600; margin-top:6px;">
                 Actual Clinical Diagnosis: <b>{actual_txt}</b>
             </div>
             <div style="font-size:0.95rem; font-weight:700; color:{match_color}; margin-top:4px;">
